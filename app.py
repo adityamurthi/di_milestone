@@ -87,7 +87,7 @@ def displayStock(symbol, params=None):
         ##Plot in Bokeh:
         source=ColumnDataSource(df)
         ##Just going to use the simple plotting feature to plot
-        p = figure(plot_width=800, plot_height=400, title='Stock Price data from AlphaVantage', x_axis_label='Date', x_axis_type="datetime")
+        p = figure(plot_width=800, plot_height=400, title='Stock data from AlphaVantage', x_axis_label='Date', x_axis_type="datetime")
         p.xaxis.formatter = DatetimeTickFormatter(years = ['%Y-%m-%d'],
                                                   months = ['%Y-%m-%d'],
                                                   days = ['%Y-%m-%d'])
