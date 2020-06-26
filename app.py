@@ -15,7 +15,7 @@ from dateutil.relativedelta import relativedelta
 from bokeh.io import show
 from bokeh.plotting import figure##, curdoc
 ##from bokeh.layouts import column
-from bokeh.models import DatetimeTickFormatter
+from bokeh.models import DatetimeTickFormatter, ColumnDataSource
 from bokeh.palettes import Spectral11
 from bokeh.embed import components
 
@@ -85,6 +85,7 @@ def displayStock(symbol, params=None):
                          & (df['Timestamp'] <= pd.to_datetime(end))]
 
         ##Plot in Bokeh:
+        source=ColumnDataSource(df)
         ##Just going to use the simple plotting feature to plot
         p = figure(plot_width=800, plot_height=400, title='Stock Price data from AlphaVantage', x_axis_label='Date', x_axis_type="datetime")
         p.xaxis.formatter = DatetimeTickFormatter(years = ['%Y-%m-%d'],
@@ -94,25 +95,36 @@ def displayStock(symbol, params=None):
             ##Default display == 'close'
             ##Render the plot
             print('No params, plotting for "close"')
-            p.line(df['Timestamp'], df['close'], legend_label=symbol+' - ' + 'close', line_width=2.5, color='magenta')
+            #p.line(df['Timestamp'], df['close'], legend_label=symbol+' - ' + 'close', line_width=2.5, color='magenta')
+            p.line(source=source, x='Timestamp', y='close', legend_label=symbol+' - ' + 'close', line_width=2.5, color='magenta')
         elif len(params) == 1:
-            p.line(df['Timestamp'], df[params[0]], legend_label=symbol+' - ' + params[0], line_width=2.5, color='magenta')
+            #p.line(df['Timestamp'], df[params[0]], legend_label=symbol+' - ' + params[0], line_width=2.5, color='magenta')
+            p.line(source=source, x='Timestamp', y=params[0], legend_label=symbol+' - ' + params[0], line_width=2.5, color='magenta')
         else:##Many lines to plot
             cols = params
             numlines=len(cols)
             mypalette=Spectral11[0:numlines]
             if len(cols) == 2:
-                p.line(df['Timestamp'], df[cols[0]], legend_label=symbol+' - ' + cols[0], line_width=2.5, color=mypalette[0])
-                p.line(df['Timestamp'], df[cols[1]], legend_label=symbol+' - ' + cols[1], line_width=2.5, color=mypalette[1])
+                #p.line(df['Timestamp'], df[cols[0]], legend_label=symbol+' - ' + cols[0], line_width=2.5, color=mypalette[0])
+                #p.line(df['Timestamp'], df[cols[1]], legend_label=symbol+' - ' + cols[1], line_width=2.5, color=mypalette[1])
+                p.line(source=source, x='Timestamp', y=cols[0], legend_label=symbol+' - ' + cols[0], line_width=2.5, color=mypalette[0])
+                p.line(source=source, x='Timestamp', y=cols[1], legend_label=symbol+' - ' + cols[1], line_width=2.5, color=mypalette[1])
             elif len(cols) == 3:
-                 p.line(df['Timestamp'], df[cols[0]], legend_label=symbol+' - ' + cols[0], line_width=2.5, color=mypalette[0])
-                 p.line(df['Timestamp'], df[cols[1]], legend_label=symbol+' - ' + cols[1], line_width=2.5, color=mypalette[1])
-                 p.line(df['Timestamp'], df[cols[2]], legend_label=symbol+' - ' + cols[2], line_width=2.5, color=mypalette[2])
+                 # p.line(df['Timestamp'], df[cols[0]], legend_label=symbol+' - ' + cols[0], line_width=2.5, color=mypalette[0])
+                 # p.line(df['Timestamp'], df[cols[1]], legend_label=symbol+' - ' + cols[1], line_width=2.5, color=mypalette[1])
+                 # p.line(df['Timestamp'], df[cols[2]], legend_label=symbol+' - ' + cols[2], line_width=2.5, color=mypalette[2])
+                 p.line(source=source, x='Timestamp', y=cols[0], legend_label=symbol+' - ' + cols[0], line_width=2.5, color=mypalette[0])
+                 p.line(source=source, x='Timestamp', y=cols[1], legend_label=symbol+' - ' + cols[1], line_width=2.5, color=mypalette[1])
+                 p.line(source=source, x='Timestamp', y=cols[2], legend_label=symbol+' - ' + cols[2], line_width=2.5, color=mypalette[2])
             else:
-                p.line(df['Timestamp'], df[cols[0]], legend_label=symbol+' - ' + cols[0], line_width=2.5, color=mypalette[0])
-                p.line(df['Timestamp'], df[cols[1]], legend_label=symbol+' - ' + cols[1], line_width=2.5, color=mypalette[1])
-                p.line(df['Timestamp'], df[cols[2]], legend_label=symbol+' - ' + cols[2], line_width=2.5, color=mypalette[2])
-                p.line(df['Timestamp'], df[cols[3]], legend_label=symbol+' - ' + cols[3], line_width=2.5, color=mypalette[3])
+                # p.line(df['Timestamp'], df[cols[0]], legend_label=symbol+' - ' + cols[0], line_width=2.5, color=mypalette[0])
+                # p.line(df['Timestamp'], df[cols[1]], legend_label=symbol+' - ' + cols[1], line_width=2.5, color=mypalette[1])
+                # p.line(df['Timestamp'], df[cols[2]], legend_label=symbol+' - ' + cols[2], line_width=2.5, color=mypalette[2])
+                # p.line(df['Timestamp'], df[cols[3]], legend_label=symbol+' - ' + cols[3], line_width=2.5, color=mypalette[3])
+                p.line(source=source, x='Timestamp', y=cols[0], legend_label=symbol+' - ' + cols[0], line_width=2.5, color=mypalette[0])
+                p.line(source=source, x='Timestamp', y=cols[1], legend_label=symbol+' - ' + cols[1], line_width=2.5, color=mypalette[1])
+                p.line(source=source, x='Timestamp', y=cols[2], legend_label=symbol+' - ' + cols[2], line_width=2.5, color=mypalette[2])
+                p.line(source=source, x='Timestamp', y=cols[3], legend_label=symbol+' - ' + cols[0], line_width=2.5, color=mypalette[3])
 
         #show(p)
         return (p)
