@@ -21,7 +21,7 @@ from bokeh.embed import components
 
 app = Flask(__name__)
 
-global app.vars = {}
+app.vars = {}
 
 def displayStock(symbol, params=None):
     """
