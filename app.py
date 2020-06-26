@@ -126,7 +126,6 @@ def displayStock(symbol, params=None):
                 p.line(source=source, x='Timestamp', y=cols[2], legend_label=symbol+' - ' + cols[2], line_width=2.5, color=mypalette[2])
                 p.line(source=source, x='Timestamp', y=cols[3], legend_label=symbol+' - ' + cols[0], line_width=2.5, color=mypalette[3])
 
-        #show(p)
         return (p)
     except KeyError as e:
         print(e)
