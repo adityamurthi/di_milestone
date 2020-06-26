@@ -148,11 +148,11 @@ def displayStock(symbol, params=None):
 
         #return redirect('/plot')
 
-@app.route('/')
-def main():
-    return redirect('/index')
+# @app.route('/')
+# def main():
+#     return redirect('/index')
 
-@app.route('/index', methods=['GET'])
+@app.route('/', methods=['GET'])
 def index():
     return render_template("test1.html")
 
