@@ -130,34 +130,44 @@ def displayStock(symbol, params=None):
     except KeyError as e:
         print(e)
 
-@app.route('/', methods=['GET', 'POST'])
-def index():
-    if request.method == 'GET':
-        return render_template("test1.html")
-    else:##request was a POST
-        app.vars['symbol'] = request.form["text"]
-        app.vars['params'] = request.form.getlist("ticker")
-        ##Generate the Bokeh plot
-        print(app.vars['symbol'], app.vars['params'])
-        p = displayStock(app.vars['symbol'], app.vars['params'])
-        try:
-            script, div = components(p)
-            return render_template("plot.html", script=script, div=div)
-        except ValueError as e:
-            return ("That ticker symbol %s is invalid! Try entering another symbol."%app.vars['symbol'])
+# @app.route('/', methods=['GET', 'POST'])
+# def index():
+#     if request.method == 'GET':
+#         return render_template("test1.html")
+#     else:##request was a POST
+#         app.vars['symbol'] = request.form["text"]
+#         app.vars['params'] = request.form.getlist("ticker")
+#         ##Generate the Bokeh plot
+#         print(app.vars['symbol'], app.vars['params'])
+#         p = displayStock(app.vars['symbol'], app.vars['params'])
+#         try:
+#             script, div = components(p)
+#             return render_template("plot.html", script=script, div=div)
+#         except ValueError as e:
+#             return ("That ticker symbol %s is invalid! Try entering another symbol."%app.vars['symbol'])
 
         #return redirect('/plot')
 
-# @app.route('/plot', methods=['GET'])
-# def plot_ticker():
-#     ##Generate the Bokeh plot
-#     print(app.vars['symbol'], app.vars['params'])
-#     p = displayStock(app.vars['symbol'], app.vars['params'])
-#     try:
-#         script, div = components(p)
-#         return render_template("plot.html", script=script, div=div)
-#     except ValueError as e:
-#         return ("That ticker symbol %s is invalid! Try entering another symbol."%app.vars['symbol'])
+@app.route('/')
+def main():
+    return redirect('/index')
+
+@app.route('/index', methods=['GET'])
+def index():
+    return render_template("test1.html")
+
+@app.route('/plot', methods=['POST'])
+def plot():
+    ##Generate the Bokeh plot
+    app.vars['symbol'] = request.form["text"]
+    app.vars['params'] = request.form.getlist("ticker")
+    print(app.vars['symbol'], app.vars['params'])
+    p = displayStock(app.vars['symbol'], app.vars['params'])
+    try:
+        script, div = components(p)
+        return render_template("plot.html", script=script, div=div)
+    except ValueError as e:
+        return ("That ticker symbol %s is invalid! Try entering another symbol."%app.vars['symbol'])
 
 if __name__ == "__main__":
     app.run(debug=True, port=33507)
