@@ -21,7 +21,7 @@ from bokeh.embed import components
 
 app = Flask(__name__)
 
-app.vars = {}
+global app.vars = {}
 
 def displayStock(symbol, params=None):
     """
@@ -128,7 +128,7 @@ def index():
         app.vars['params'] = request.form.getlist("ticker")
         return redirect('/plot')
 
-@app.route('/plot')
+@app.route('/plot', methods=['GET'])
 def plot_ticker():
     ##Generate the Bokeh plot
     p = displayStock(app.vars['symbol'], app.vars['params'])
