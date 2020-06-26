@@ -131,6 +131,7 @@ def index():
 @app.route('/plot', methods=['GET'])
 def plot_ticker():
     ##Generate the Bokeh plot
+    print(app.vars['symbol'], app.vars['params'])
     p = displayStock(app.vars['symbol'], app.vars['params'])
     try:
         script, div = components(p)
