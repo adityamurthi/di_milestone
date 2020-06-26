@@ -105,22 +105,13 @@ def displayStock(symbol, params=None):
             numlines=len(cols)
             mypalette=Spectral11[0:numlines]
             if len(cols) == 2:
-                #p.line(df['Timestamp'], df[cols[0]], legend_label=symbol+' - ' + cols[0], line_width=2.5, color=mypalette[0])
-                #p.line(df['Timestamp'], df[cols[1]], legend_label=symbol+' - ' + cols[1], line_width=2.5, color=mypalette[1])
                 p.line(source=source, x='Timestamp', y=cols[0], legend_label=symbol+' - ' + cols[0], line_width=2.5, color=mypalette[0])
                 p.line(source=source, x='Timestamp', y=cols[1], legend_label=symbol+' - ' + cols[1], line_width=2.5, color=mypalette[1])
             elif len(cols) == 3:
-                 # p.line(df['Timestamp'], df[cols[0]], legend_label=symbol+' - ' + cols[0], line_width=2.5, color=mypalette[0])
-                 # p.line(df['Timestamp'], df[cols[1]], legend_label=symbol+' - ' + cols[1], line_width=2.5, color=mypalette[1])
-                 # p.line(df['Timestamp'], df[cols[2]], legend_label=symbol+' - ' + cols[2], line_width=2.5, color=mypalette[2])
                  p.line(source=source, x='Timestamp', y=cols[0], legend_label=symbol+' - ' + cols[0], line_width=2.5, color=mypalette[0])
                  p.line(source=source, x='Timestamp', y=cols[1], legend_label=symbol+' - ' + cols[1], line_width=2.5, color=mypalette[1])
                  p.line(source=source, x='Timestamp', y=cols[2], legend_label=symbol+' - ' + cols[2], line_width=2.5, color=mypalette[2])
             else:
-                # p.line(df['Timestamp'], df[cols[0]], legend_label=symbol+' - ' + cols[0], line_width=2.5, color=mypalette[0])
-                # p.line(df['Timestamp'], df[cols[1]], legend_label=symbol+' - ' + cols[1], line_width=2.5, color=mypalette[1])
-                # p.line(df['Timestamp'], df[cols[2]], legend_label=symbol+' - ' + cols[2], line_width=2.5, color=mypalette[2])
-                # p.line(df['Timestamp'], df[cols[3]], legend_label=symbol+' - ' + cols[3], line_width=2.5, color=mypalette[3])
                 p.line(source=source, x='Timestamp', y=cols[0], legend_label=symbol+' - ' + cols[0], line_width=2.5, color=mypalette[0])
                 p.line(source=source, x='Timestamp', y=cols[1], legend_label=symbol+' - ' + cols[1], line_width=2.5, color=mypalette[1])
                 p.line(source=source, x='Timestamp', y=cols[2], legend_label=symbol+' - ' + cols[2], line_width=2.5, color=mypalette[2])
@@ -129,28 +120,6 @@ def displayStock(symbol, params=None):
         return (p)
     except KeyError as e:
         print(e)
-
-# @app.route('/', methods=['GET', 'POST'])
-# def index():
-#     if request.method == 'GET':
-#         return render_template("test1.html")
-#     else:##request was a POST
-#         app.vars['symbol'] = request.form["text"]
-#         app.vars['params'] = request.form.getlist("ticker")
-#         ##Generate the Bokeh plot
-#         print(app.vars['symbol'], app.vars['params'])
-#         p = displayStock(app.vars['symbol'], app.vars['params'])
-#         try:
-#             script, div = components(p)
-#             return render_template("plot.html", script=script, div=div)
-#         except ValueError as e:
-#             return ("That ticker symbol %s is invalid! Try entering another symbol."%app.vars['symbol'])
-
-        #return redirect('/plot')
-
-# @app.route('/')
-# def main():
-#     return redirect('/index')
 
 @app.route('/', methods=['GET'])
 def index():
