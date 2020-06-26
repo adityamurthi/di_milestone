@@ -128,11 +128,8 @@ def index():
         app.vars['params'] = request.form.getlist("ticker")
         return redirect('/plot')
 
-
 @app.route('/plot')
 def plot_ticker():
-    ##Plot uses a separate function.
-    print(app.vars['symbol'], app.vars['params'])
     ##Generate the Bokeh plot
     p = displayStock(app.vars['symbol'], app.vars['params'])
     try:
