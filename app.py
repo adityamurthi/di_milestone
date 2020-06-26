@@ -170,4 +170,4 @@ def plot():
         return ("That ticker symbol %s is invalid! Try entering another symbol."%app.vars['symbol'])
 
 if __name__ == "__main__":
-    app.run(debug=True, port=33507)
+    app.run(port=33507)
