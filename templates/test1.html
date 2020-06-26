@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Testing Flask.">
+    <meta name="author" content="@adityamurthi">
+    <title>Stock Ticker Plotter</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!--link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"-->
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Open+Sans);
+
+      body{
+        background: #f2f2f2;
+        font-family: 'Open Sans', sans-serif;
+        text-align: center;
+        margin: auto;
+        padding: 0;
+      }
+
+      .search {
+        width: 100%;
+        position: relative;
+        display: flex;
+      }
+
+      .searchTerm {
+        width: 100%;
+        border: 3px solid #00B4CC;
+        border-right: none;
+        padding: 5px;
+        height: 20px;
+        border-radius: 5px 0 0 5px;
+        outline: none;
+        color: #9DBFAF;
+      }
+
+      .searchTerm:focus{
+        color: #00B4CC;
+      }
+
+      .searchButton {
+        width: 40px;
+        height: 36px;
+        border: 1px solid #00B4CC;
+        background: #00B4CC;
+        text-align: center;
+        color: #fff;
+        border-radius: 0 5px 5px 0;
+        cursor: pointer;
+        font-size: 20px;
+      }
+
+      /*Resize the wrap to see the search bar change!*/
+      .wrap{
+        width: 30%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+    </style>
+    <!--style>
+        body {
+          font-family: Arial;
+          text-align: center;
+          margin: auto;
+          padding: 0;
+        }
+
+        * {
+          box-sizing: border-box;
+        }
+
+        form.example input[type=text] {
+          padding: 10px;
+          font-size: 17px;
+          border: 1px solid grey;
+          float: left;
+          width: 80%;
+          background: #f1f1f1;
+        }
+
+        form.example button {
+          float: left;
+          width: 20%;
+          padding: 10px;
+          background: #2196F3;
+          color: white;
+          font-size: 17px;
+          border: 1px solid grey;
+          border-left: none;
+          cursor: pointer;
+        }
+
+        form.example button:hover {
+          background: #0b7dda;
+        }
+
+      </style-->
+</head>
+<div class=page>
+  <h1>Stock Ticker Plotter</h1>
+  <div class=metanav>
+  <p>
+    <h4>
+      This utility is used to plot the stock for a number of public companies
+      the data for which is provided by the <a href="https://www.alphavantage.co/">AlphaVanatge</a> API.
+      <br \>
+      Please enter the ticker symbol in the search bar below to display the closing stock for
+      the last month.
+    </h4>
+  </p>
+    <form id='tickerform' method='POST' action="index">
+        <!--input type="text" placeholder="Search..." name="text">
+        <button type="submit"><i class="fa fa-search"</i></button-->
+        <div class="wrap">
+          <div class="search">
+            <input type="text" class="searchTerm" placeholder="Enter ticker symbol", name="text">
+            <button type="submit" class="searchButton">
+              <i class="fa fa-search"></i>
+            </button>
+          </div>
+            <h4>Ticker Price Options</h4>
+            <input type="checkbox" value="open" name="ticker" /> Open
+            <input type="checkbox" value="low" name="ticker" /> Low
+            <input type="checkbox" value="high" name="ticker" /> High
+            <input type="checkbox" value="close" name="ticker" /> Closing
+        </div>
+    </form>
+  </div>
+</div>
+</html>
+
+<!--body>
+!--style="margin:auto;max-width:300px">
+  <h2>Enter ticker symbol</h2>
+    <form class="example" method='POST' action="/" style="margin:auto;max-width:300px">
+        <input type="text" placeholder="Search..." name="text">
+        <button type="submit"><i class="fa fa-search"</i></button>
+        Open <input type="checkbox" value="open" name="ticker">
+        Low <input type="checkbox" value="low" name="ticker">
+        High <input type="checkbox" value="high" name="ticker">
+        Close <input type="checkbox" value="close" name="ticker">
+    </form>
+
+    {{ script|safe }}
+    {{ div|safe }}
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <!--script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script-->
+    <!--script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></<script type="text/javascript"-->
+<!--/body-->
+</html>
